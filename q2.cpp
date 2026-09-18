@@ -42,7 +42,6 @@ void insertCoach(Node*& head, int id)
 {
     Node* newNode = new Node(id);
 
-    // First node
     if (head == nullptr)
     {
         head = newNode;
@@ -63,7 +62,7 @@ void insertCoach(Node*& head, int id)
 // Detach a node from the circular list
 void detach(Node*& head, Node* node)
 {
-    // Only one node
+ 
     if (node->next == node)
     {
         head = nullptr;
@@ -71,7 +70,6 @@ void detach(Node*& head, Node* node)
         return;
     }
 
-    // If deleting head
     if (node == head)
     {
         head = node->next;
@@ -94,19 +92,15 @@ void moveRight(Node*& head, int id)
         return;
     }
 
-    // Already immediately after head
     if (head->next == node)
         return;
 
-    // If node is head, nothing to move
     if (node == head)
         return;
 
-    // Remove node from its current position
     node->prev->next = node->next;
     node->next->prev = node->prev;
 
-    // Insert node after head
     node->next = head->next;
     node->prev = head;
 
@@ -125,19 +119,14 @@ void moveLeft(Node*& head, int id)
         return;
     }
 
-    // Already immediately before head
     if (head->prev == node)
         return;
-
-    // If node is head, nothing to move
     if (node == head)
         return;
 
-    // Remove node from current position
     node->prev->next = node->next;
     node->next->prev = node->prev;
 
-    // Insert node before head
     node->next = head;
     node->prev = head->prev;
 
@@ -193,7 +182,6 @@ void findCoach(Node* head, int id)
         nextSteps++;
     }
 
-    // Find steps using PREV
     int prevSteps = 0;
     current = head;
 
@@ -203,7 +191,6 @@ void findCoach(Node* head, int id)
         prevSteps++;
     }
 
-    // Choose shorter direction
     if (nextSteps <= prevSteps)
     {
         cout << "Direction: NEXT\n";
