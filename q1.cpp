@@ -17,7 +17,6 @@ public:
 };
 
 // Flatten the peculiar linked list
-// Returns the tail of the flattened list
 Node* flatten(Node* head)
 {
     if (head == nullptr)
@@ -28,27 +27,19 @@ Node* flatten(Node* head)
 
     while (cur != nullptr)
     {
-        // Save original next
         Node* originalNext = cur->next;
 
-        // If current node has a child
         if (cur->child != nullptr)
         {
             Node* childHead = cur->child;
 
-            // Recursively flatten child list
             Node* childTail = flatten(childHead);
 
-            // Put child list after current node
             cur->next = childHead;
-
-            // Remove child pointer
             cur->child = nullptr;
 
-            // Connect child tail to original next
             childTail->next = originalNext;
 
-            // Update tail
             tail = childTail;
         }
         else
@@ -56,7 +47,6 @@ Node* flatten(Node* head)
             tail = cur;
         }
 
-        // Continue with original next
         if (originalNext == nullptr)
             break;
 
@@ -119,7 +109,6 @@ int main()
             nodes[i]->child = nodes[childIndex];
     }
 
-    // First node is the head
     Node* head = nodes[0];
 
     // Flatten the list
@@ -127,8 +116,6 @@ int main()
 
     cout << "\nFinal list: ";
     printList(head);
-
-    // Delete nodes
     for (int i = 0; i < n; i++)
     {
         delete nodes[i];
